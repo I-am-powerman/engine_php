@@ -1,0 +1,33 @@
+<?php
+$url = $_SERVER['REQUEST_URI'];
+require_once('workDB.php');
+require_once('config.php');
+$connect = connectDB(
+	$host, 
+	$port,
+	$dbname, 
+	$user,
+	$password
+	);
+
+if (preg_match('#^/page/([a-z0-9_-]+)$#', $url, $params)) {
+	$page = include 'view/page/show.php';
+}
+
+if (preg_match('#^/page/all$#', $url, $params)) {
+	$page = include 'view/page/all.php';
+}
+
+$layout = file_get_contents('layout.php');
+$layout = str_replace('{{ title }}', 
+	$page['title'], 
+	$layout);
+$layout = str_replace('{{ content }}', 
+	$page['content'], 
+	$layout);
+
+echo $layout;
+
+
+	
+?>
