@@ -1,5 +1,0 @@
-id      slug        title1          content
-1	my-first-page	title1	<div> content1 </div>
-2	my-second-page	title2	<div> content2 </div>
-3	my-third-page	title3	<div> content3 </div>
-404	404	404	<div> 404 </div>

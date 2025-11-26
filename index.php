@@ -10,6 +10,7 @@ $connect = connectDB(
 	$password
 	);
 
+
 if (preg_match('#^/page/([a-z0-9_-]+)$#', $url, $params)) {
 	$page = include 'view/page/show.php';
 }
@@ -18,16 +19,27 @@ if (preg_match('#^/page/all$#', $url, $params)) {
 	$page = include 'view/page/all.php';
 }
 
-$layout = file_get_contents('layout.php');
-$layout = str_replace('{{ title }}', 
-	$page['title'], 
-	$layout);
-$layout = str_replace('{{ content }}', 
-	$page['content'], 
-	$layout);
+if (preg_match('#^/page/new_user([a-z0-9_-]{0,})$#', $url, $params)) {
+	include('./view/page/new_user.php');
+	die;
+}
 
-echo $layout;
+if(preg_match('#^/page/new_user\?new_user\=([A-Za-z0-9_-]{0,})$#', 
+		$url, $params)){
+			$page = include('./view/page/getUserBD.php');
+		}
+
+if ($page != null && is_array($page)){
+	$layout = file_get_contents('layout.php');
+	$layout = str_replace('{{ title }}', 
+		$page['users'], 
+		$layout);
+	$layout = str_replace('{{ content }}', 
+		$page['users'], 
+		$layout);
+
+	echo $layout;
+}
 
 
 	
-?>

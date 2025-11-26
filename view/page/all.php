@@ -1,6 +1,6 @@
 <?php
-	$query = "SELECT slug, title FROM 
-		pages"; 
+	$query = "SELECT slug, users FROM 
+		users"; 
 	$res = queryDB($connect, $query); 
 	
 	for ($data = []; 
@@ -14,14 +14,14 @@
 				<a href="/page/'  
 					. $page['slug'] 
 					. '">' . 
-					$page['title'] . '</a> 
+					$page['users'] . '</a> 
 			</div>
 		';
 	}
 	
 	$page = [
 		'title' => 'all pages',
-		'content' => $content
+		'users' => $content
 	];
 	
 	return $page;

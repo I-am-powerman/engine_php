@@ -1,6 +1,6 @@
 <?php
 $slug   = $params[1];
-$query  = "SELECT * FROM pages 
+$query  = "SELECT * FROM users 
     WHERE slug='$slug'"; 
 
 $res = queryDB($connect, $query); 
