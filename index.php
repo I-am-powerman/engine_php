@@ -11,25 +11,20 @@ $connect = connectDB(
 	);
 
 
-if (preg_match('#^/page/([a-z0-9_-]+)$#', $url, $params)) {
+if (preg_match('#^/page/([a-z0-9_-]{4,})$#', $url, $params)) {
 	$page = include 'view/page/show.php';
 }
 
 if (preg_match('#^/page/all$#', $url, $params)) {
 	$page = include 'view/page/all.php';
-}
+} 
 
 if (preg_match('#^/page/new_user([a-z0-9_-]{0,})$#', $url, $params)) {
 	include('./view/page/new_user.php');
 	die;
-}
+} 
 
-if(preg_match('#^/page/new_user\?new_user\=([A-Za-z0-9_-]{0,})$#', 
-		$url, $params)){
-			$page = include('./view/page/getUserBD.php');
-		}
-
-if ($page != null && is_array($page)){
+if (!empty($page) && is_array($page)){
 	$layout = file_get_contents('layout.php');
 	$layout = str_replace('{{ title }}', 
 		$page['users'], 
