@@ -11,7 +11,7 @@ $connect = connectDB(
 	);
 
 
-if (preg_match('#^/page/([a-z0-9_-]{4,})$#', $url, $params)) {
+if (preg_match('#^/page/(?<slug>[a-z0-9_-]{4,})$#', $url, $params)) {
 	$page = include 'view/page/show.php';
 }
 

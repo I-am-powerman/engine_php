@@ -1,5 +1,5 @@
 <?php
-$slug   = $params[1];
+$slug   = $params['slug'];
 $query  = "SELECT * FROM users 
     WHERE slug='$slug'"; 
 
