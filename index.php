@@ -1,7 +1,7 @@
 <?php
 $url = $_SERVER['REQUEST_URI'];
 require_once('workDB.php');
-require_once('config.php');
+require_once('/home/sky/Документы/Proekti/config.php');
 $connect = connectDB(
 	$host, 
 	$port,
@@ -11,29 +11,33 @@ $connect = connectDB(
 	);
 
 
-if (preg_match('#^/page/(?<slug>[a-z0-9_-]{4,})$#', $url, $params)) {
-	$page = include 'view/page/show.php';
+$route = '^/page/(?<country>[A-Za-z0-9_-]+)/(?<city>[A-Za-z0-9_-]+)$'; 
+if (preg_match("#$route#", $url, $params)) {
+	$page = include 'view/page/showInfSity.php';
 }
 
-if (preg_match('#^/page/all$#', $url, $params)) {
-	$page = include 'view/page/all.php';
-} 
+$route = '^/page/(?<country>[A-Za-z0-9_-]+)$';
+if (preg_match("#$route#", $url, $params)) {
+	$page = include 'view/page/showAllSityCountry.php';
+}
 
-if (preg_match('#^/page/new_user([a-z0-9_-]{0,})$#', $url, $params)) {
-	include('./view/page/new_user.php');
-	die;
-} 
+$route = '^/$';
+if (preg_match("#$route#", $url, $params)) {
+	$page = include 'view/page/showAllCountry.php';
+}
 
 if (!empty($page) && is_array($page)){
 	$layout = file_get_contents('layout.php');
 	$layout = str_replace('{{ title }}', 
-		$page['users'], 
+		$page['title'], 
 		$layout);
 	$layout = str_replace('{{ content }}', 
-		$page['users'], 
+		$page['content'], 
 		$layout);
 
 	echo $layout;
+} else {
+	var_dump($page);
 }
 
 

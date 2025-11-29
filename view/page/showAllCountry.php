@@ -1,6 +1,5 @@
 <?php
-	$query = "SELECT slug, users FROM 
-		users"; 
+	$query = "SELECT * FROM country"; 
 	$res = queryDB($connect, $query); 
 	
 	for ($data = []; 
@@ -12,16 +11,16 @@
 		$content .= '
 			<div>
 				<a href="/page/'  
-					. $page['slug'] 
+					. $page['country'] 
 					. '">' . 
-					$page['users'] . '</a> 
+					$page['country'] . '</a> 
 			</div>
 		';
 	}
 	
 	$page = [
-		'title' => 'all pages',
-		'users' => $content
+		'title' => 'all country',
+		'content' => $content
 	];
 	
 	return $page;

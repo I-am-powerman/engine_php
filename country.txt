@@ -1,0 +1,4 @@
+id   |   country    |
+1	     Russia
+2	     Norway
+3	     Iceland
